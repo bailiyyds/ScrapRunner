@@ -1,0 +1,5 @@
+const samplePools={},sampleTimes={};
+function audioStatus(text){const node=document.getElementById('audio-test');if(node)node.textContent=text}
+function sampleSound(kind,force=false){if(!['gun','hit','kill','missile','arc','frost','drone','step'].includes(kind)||typeof Audio==='undefined'||feedbackSettings.volume<=0)return false;const now=Date.now(),gap={gun:65,hit:90,kill:90,missile:250,arc:100,frost:200,drone:100,step:180}[kind];if(!force&&now-(sampleTimes[kind]||0)<gap)return true;sampleTimes[kind]=now;
+ try{const pool=samplePools[kind]??=(Array.from({length:3},()=>{const a=new Audio('assets/audio/'+kind+'.wav');a.preload='auto';return a}));const sound=pool.find(a=>a.paused||a.ended)||pool[0];sound.currentTime=0;sound.volume=Math.min(1,feedbackSettings.volume*(kind==='step'?.45:1.5));const promise=sound.play();if(promise)promise.then(()=>{if(force)audioStatus('声音已启用 · 再次试听')}).catch(()=>audioStatus('声音被阻止 · 点击重试'));return true}catch{audioStatus('声音加载失败');return false}}
+function enableGameAudio(){audioReady();if(feedbackSettings.volume<=0){audioStatus('当前静音 · 请在设置调高音量');return}audioStatus('正在启用声音…');if(!sampleSound('gun',true))audioStatus('音频不可用')}

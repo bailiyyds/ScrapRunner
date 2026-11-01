@@ -1,0 +1,13 @@
+{
+  "image": "runner.png",
+  "frameWidth": 48,
+  "frameHeight": 48,
+  "columns": 4,
+  "rows": 4,
+  "fps": 8,
+  "animations": {"down": [0,1,2,3], "left": [4,5,6,7], "right": [8,9,10,11], "up": [12,13,14,15]},
+  "idleColumn": 0,
+  "palette": ["#172333", "#304354", "#647786", "#b4c6ca", "#f1dfb0", "#eaa33b", "#b65c29", "#55d9d2"],
+  "alpha": [0,255],
+  "filter": "nearest"
+}
